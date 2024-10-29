@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
 export const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -10,4 +10,5 @@ export const transporter = nodemailer.createTransport({
   // },
 });
 
-export const defaultSenderEmail = process.env.DEFAULT_SENDER_EMAIL || 'admin@example.com'
+export const defaultSenderEmail =
+  process.env.DEFAULT_SENDER_EMAIL || "admin@example.com";

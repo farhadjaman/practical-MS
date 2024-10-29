@@ -16,8 +16,7 @@ const generateVerificationToken = () => {
   const token = (timestamp + randomString).slice(-5);
 
   return token;
-
-}
+};
 const userRegistration = async (
   req: Request,
   res: Response,
@@ -25,7 +24,6 @@ const userRegistration = async (
 ) => {
   try {
     const parsedBody = UserCreateSchema.safeParse(req.body);
-
 
     console.log("auth service config", process.env.USER_SERVICE_URL);
 
@@ -92,7 +90,11 @@ const userRegistration = async (
       source: "user-registration",
     });
 
-    res.status(201).json({ message: "User created successfully. check your email for verficiation coode", user });
+    res.status(201).json({
+      message:
+        "User created successfully. check your email for verficiation coode",
+      user,
+    });
     return;
   } catch (error) {
     next(error);

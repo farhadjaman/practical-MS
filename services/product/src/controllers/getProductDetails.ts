@@ -41,26 +41,22 @@ const getProductDetails = async (
         },
       });
 
-      res
-        .status(201)
-        .json({
-          ...product,
-          inventoryId: inventory.id,
-          stock: inventory.quantity,
-          stockStatus: inventory.quantity > 0 ? "In Stock" : "Out of Stock",
-        });
+      res.status(201).json({
+        ...product,
+        inventoryId: inventory.id,
+        stock: inventory.quantity,
+        stockStatus: inventory.quantity > 0 ? "In Stock" : "Out of Stock",
+      });
     }
     const {
       data: { inventory },
     } = await axios.get(`${inventoryUrl}/inventories/${product.inventoryId}`);
 
-    res
-      .status(201)
-      .json({
-        ...product,
-        stock: inventory.quantity,
-        stockStatus: inventory.quantity > 0 ? "In Stock" : "Out of Stock",
-      });
+    res.status(201).json({
+      ...product,
+      stock: inventory.quantity,
+      stockStatus: inventory.quantity > 0 ? "In Stock" : "Out of Stock",
+    });
   } catch (error) {
     next(error);
   }

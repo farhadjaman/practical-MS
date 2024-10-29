@@ -4,30 +4,26 @@ import { AccessTokenSchema } from "@/schemas";
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
-const verfiyToken = async ({
-  req,
-  res,
-  next,
-}: {
-  req: Request;
-  res: Response;
-  next: NextFunction;
-}) => {
+const verfiyToken = async (req:Request,res: Response, next:NextFunction) => {
   try {
     const parsedBody = AccessTokenSchema.safeParse(req.body);
 
-    if (!parsedBody.success || !parsedBody.data) {
+    if (!parsedBody.success) {
       res.status(400).json({ message: "Invalid request body" });
       return;
     }
 
     const { accessToken } = parsedBody.data;
-
     const decoded = jwt.verify(accessToken, jwtSecret);
+
+    if(!decoded){
+      res.status(401).json({message: "Unauthorized"});
+      return;
+    }
 
     const user = await prisma.user.findUnique({
       where: {
-        id: decoded.id,
+        id: decoded.userId,
       },
       select: {
         id: true,

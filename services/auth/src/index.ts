@@ -1,10 +1,17 @@
-import cors from "cors";
+
 import dotenv from "dotenv";
+dotenv.config();
+
+import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
 import morgan from "morgan";
-import { userLogin, userRegistration, verfiyEmail, verifyToken } from "./controllers";
+import {
+  userLogin,
+  userRegistration,
+  verfiyEmail,
+  verifyToken,
+} from "./controllers";
 
-dotenv.config();
 
 const app = express();
 app.use(express.json());
@@ -26,7 +33,7 @@ app.use(morgan("dev"));
 
 // Routes
 app.post("/auth/register", userRegistration);
-app.post("/auth/login", userLogin)
+app.post("/auth/login", userLogin);
 app.post("/auth/verify-token", verifyToken);
 app.post("/auth/verify-email", verfiyEmail);
 

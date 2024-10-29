@@ -1,9 +1,10 @@
-import cors from "cors";
 import dotenv from "dotenv";
+dotenv.config();
+
+import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
 import morgan from "morgan";
 
-dotenv.config();
 
 const app = express();
 app.use(express.json());

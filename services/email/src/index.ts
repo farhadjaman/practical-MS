@@ -1,10 +1,10 @@
-import cors from "cors";
 import dotenv from "dotenv";
+dotenv.config();
+
+import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
 import morgan from "morgan";
 import { getEmails, sendEmail } from "./controllers";
-
-dotenv.config();
 
 const app = express();
 app.use(express.json());
@@ -28,7 +28,6 @@ app.use(morgan("dev"));
 
 app.post("/emails/send", sendEmail);
 app.get("/emails", getEmails);
-
 
 // 404 handler
 app.use((_req: Request, res: Response) => {

@@ -28,8 +28,6 @@ app.use("/api", limiter);
 app.use(morgan("dev"));
 app.use(express.json());
 
-//TODO: Auth middleware
-
 //Routes
 configureRoutes(app);
 

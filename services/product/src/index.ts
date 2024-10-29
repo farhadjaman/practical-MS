@@ -1,26 +1,26 @@
-import cors from "cors";
 import dotenv from "dotenv";
+dotenv.config();
+
+import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
 import morgan from "morgan";
 import { createProduct, getProductDetails, getProducts } from "./controllers";
-
-dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
 
-app.use((req: Request, res: Response, next: NextFunction) => {
-  const allowedOrigins = ["http://localhost:8081", "http://127.0.0.1:8081"];
-  const origin = req.headers.origin;
+// app.use((req: Request, res: Response, next: NextFunction) => {
+//   const allowedOrigins = ["http://localhost:8081", "http://127.0.0.1:8081"];
+//   const origin = req.headers.origin;
 
-  if (origin && allowedOrigins.includes(origin)) {
-    console.log("Setting Access-Control-Allow-Origin:", origin);
-    res.setHeader("Access-Control-Allow-Origin", origin);
-    next();
-  } else res.status(403).json({ message: "Forbidden" });
-});
+//   if (origin && allowedOrigins.includes(origin)) {
+//     console.log("Setting Access-Control-Allow-Origin:", origin);
+//     res.setHeader("Access-Control-Allow-Origin", origin);
+//     next();
+//   } else res.status(403).json({ message: "Forbidden" });
+// });
 
 // Routes
 app.post("/products", createProduct);

@@ -1,3 +1,4 @@
+import { jwtSecret } from "@/config";
 import prisma from "@/prisma";
 import { UserLoginSchema } from "@/schemas";
 import { LoginAttempt } from "@prisma/client";
@@ -23,13 +24,9 @@ const createLoginHistory = async (info: LoginHistory) => {
   });
 };
 
-const userLogin = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+const userLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    console.log(req)
+    console.log(req);
     const ipAddress =
       (req.headers["x-forwarded-for"] as string) || req.ip || "";
     const userAgent = req.headers["user-agent"] || "";
@@ -110,10 +107,10 @@ const userLogin = async (
         name: user.name,
         role: user.role,
       },
-      process.env.JWT_SECRET ?? "my_service_key",
+      jwtSecret || "secret-test-2323",
       {
         expiresIn: "2h",
-      },
+      }
     );
 
     await createLoginHistory({

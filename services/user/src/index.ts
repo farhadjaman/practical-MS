@@ -1,10 +1,12 @@
-import cors from "cors";
 import dotenv from "dotenv";
+dotenv.config();
+
+import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
 import morgan from "morgan";
 import { createUser, getUserDetails } from "./controllers";
 
-dotenv.config();
+
 
 const app = express();
 app.use(express.json());
@@ -22,7 +24,7 @@ app.use(morgan("dev"));
 //   }
 //   else
 //   res.status(403).json({ message: "Forbidden" });
-// });
+// }); 
 
 // Routes
 app.get("/users/:id", getUserDetails);
